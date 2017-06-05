@@ -1,0 +1,19 @@
+* {
+	box-sizing: border-box;
+}
+html, body {
+	background: linear-gradient(#084782, #000307) no-repeat;\
+	-webkit-user-select: none;/*webkit浏览器*/
+	-moz-user-select: none;/*火狐*/
+	-ms-user-select: none;/*IE10*/
+	user-select: none;
+}
+a {
+	text-decoration: none;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
+.clear {
+	clear: both;
+}
