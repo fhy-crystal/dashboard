@@ -196,7 +196,7 @@ module.exports = [
 	},
 	{
 		"code": "CN",
-		"value": 980,
+		"value": 97094,
 		"name": "China"
 	},
 	{
@@ -326,7 +326,7 @@ module.exports = [
 	},
 	{
 		"code": "FR",
-		"value": 118,
+		"value": 19022,
 		"name": "France"
 	},
 	{
@@ -351,7 +351,7 @@ module.exports = [
 	},
 	{
 		"code": "DE",
-		"value": 234,
+		"value": 10109,
 		"name": "Germany"
 	},
 	{
@@ -366,7 +366,7 @@ module.exports = [
 	},
 	{
 		"code": "GL",
-		"value": 0.02,
+		"value": 50,
 		"name": "Greenland"
 	},
 	{
@@ -461,7 +461,7 @@ module.exports = [
 	},
 	{
 		"code": "IT",
-		"value": 206,
+		"value": 38012,
 		"name": "Italy"
 	},
 	{
@@ -471,7 +471,7 @@ module.exports = [
 	},
 	{
 		"code": "JP",
-		"value": 350,
+		"value": 87042,
 		"name": "Japan"
 	},
 	{
@@ -786,7 +786,7 @@ module.exports = [
 	},
 	{
 		"code": "RU",
-		"value": 450,
+		"value": 40314,
 		"name": "Russian Federation"
 	},
 	{
@@ -871,7 +871,7 @@ module.exports = [
 	},
 	{
 		"code": "ES",
-		"value": 92,
+		"value": 41711,
 		"name": "Spain"
 	},
 	{
@@ -1006,18 +1006,18 @@ module.exports = [
 	},
 	{
 		"code": "GB",
-		"value": 257,
+		"value": 84399,
 		"name": "United Kingdom"
 	},
 	{
 		"code": "US",
-		"value": 34,
+		"value": 85033,
 		"name": "United States"
 	},
 	{
 		"code": "UY",
 		"value": 19,
-		"name": "Uruguay"
+		"name": "Uruguay" 
 	},
 	{
 		"code": "UZ",
@@ -1036,7 +1036,7 @@ module.exports = [
 	},
 	{
 		"code": "VN",
-		"value": 280,
+		"value": 11070,
 		"name": "Vietnam"
 	},
 	{

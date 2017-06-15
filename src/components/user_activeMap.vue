@@ -1,6 +1,6 @@
 <template>
 	<div class="map">
-		<highmaps :options="options" style="height: 1000px;"></highmaps>
+		<highmaps :options="options" style="height: 950px;"></highmaps>
 	</div>
 </template>
 
@@ -25,6 +25,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 	.map {
-		height: 1300px;
+		height: 1200px;
 	}
 </style>

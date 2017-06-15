@@ -44,40 +44,7 @@
 			}
 		},
 		methods: {
-			// tab切换
-			toggle(index, view) {
-				this.navTab.activeIndex = index;
-				this.navTab.currentView = view;
-				let url = '', columnTitle = '', tableTitle = '';
-				switch(index) {
-					case 0: {
-						url = config.httpUrl + 'queryKit';
-						columnTitle = 'DNA KIT增长曲线';
-						tableTitle = 'DNA KIT激活数量列表';
-						break;
-					}
-					case 1: {
-						url = config.httpUrl + 'queryNet';
-						columnTitle = '第三方设备增长曲线';
-						tableTitle = '第三方设备激活数量列表';
-						break;
-					}
-					case 2: {
-						url = config.httpUrl + 'queryKit';
-						columnTitle = '互联网设备增长曲线';
-						tableTitle = '互联网设备激活数量列表';
-						break;
-					}
-						
-					case 3: {
-						url = config.httpUrl + 'queryNet';
-						columnTitle = '虚拟设备增长曲线';
-						tableTitle = '虚拟设备激活数量列表';
-						break;
-					}
-						
-				}
-			},
+			
 		},
 		components: {
 			airModel

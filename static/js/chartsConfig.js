@@ -33,7 +33,7 @@ let chartsConfig = {
 			},
 			yAxis: {
 				title: {
-					text: '单位：万',
+					text: '',
 					align: 'high',
 					offset: 0,
 					rotation: 0,
@@ -47,6 +47,7 @@ let chartsConfig = {
 						color: '#fff'
 					}
 				},
+				min: 40000,
 				gridLineWidth: 0
 			},
 			tooltip: {
@@ -124,7 +125,7 @@ let chartsConfig = {
 			},
 			yAxis: {
 				title: {
-					text: '单位：万',
+					text: '',
 					align: 'high',
 					offset: 0,
 					rotation: 0,
@@ -138,6 +139,7 @@ let chartsConfig = {
 						color: '#fff'
 					}
 				},
+				min: 2500,
 				gridLineWidth: 0
 			},
 			legend: {
@@ -246,7 +248,7 @@ let chartsConfig = {
 			},
 			yAxis: {
 				title: {
-					text: '单位：万',
+					text: '',
 					align: 'high',
 					offset: 0,
 					rotation: 0,
@@ -323,7 +325,7 @@ let chartsConfig = {
 			},
 			yAxis: {
 				title: {
-					text: '单位：万',
+					text: '',
 					align: 'high',
 					offset: 0,
 					rotation: 0,
@@ -399,7 +401,7 @@ let chartsConfig = {
 			},
 			yAxis: {
 				title: {
-					text: '单位：万',
+					text: '',
 					align: 'high',
 					offset: 0,
 					rotation: 0,
@@ -462,7 +464,7 @@ let chartsConfig = {
 			},
 			colorAxis: {
 				min: 1,
-				max: 1000,
+				max: 100000,
 				stops: [
 					[0, 'rgba(221, 221, 221, 0.5)'],
 					[1, 'rgba(50, 200, 255, 0.5)']
@@ -480,9 +482,9 @@ let chartsConfig = {
 						color: '#e03030'
 					}
 				},
-				tooltip: {
-					valueSuffix: '/万'
-				}
+				// tooltip: {
+				// 	valueSuffix: '/台'
+				// }
 			}]
 		},
 		'activeNum': {
@@ -513,7 +515,7 @@ let chartsConfig = {
 			},
 			yAxis: {
 				title: {
-					text: '单位：万',
+					text: '',
 					align: 'high',
 					offset: 0,
 					rotation: 0,
@@ -585,7 +587,7 @@ let chartsConfig = {
 			},
 			yAxis: {
 				title: {
-					text: '单位：万',
+					text: '',
 					align: 'high',
 					x: 15,
 					style: {

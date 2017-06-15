@@ -129,6 +129,6 @@ export default {
 		bottom: 0;
 		left: 0;
 		margin: auto;
-		width: 90%;
+		height: 125%;
 	}
 </style>

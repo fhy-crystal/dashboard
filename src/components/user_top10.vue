@@ -20,7 +20,7 @@ export default {
 			}
 		},
 	created() {
-		let url = config.httpUrl + 'queryAppByYear';
+		let url = config.httpUrl + 'querykit';
 		// 初始化时加载kit数据
 		this.queryData(url);
 	},
@@ -29,8 +29,8 @@ export default {
 		queryData(url) {
 			this.$http.get(url).then((data) => {
 				// 处理折线图
-				this.options.series[0].data = data.data.data[0].data.slice(0, 10);
-				this.options.xAxis.categories = ['RM Mini 3', 'RM Pro', 'SP Mini 3', 'SP2', 'SP mini', 'MP2', 'MP1', 'RM Home', 'A1', 'S1'];
+				this.options.series[0].data = data.data.data[2].monActive.slice(0, 10);
+				this.options.xAxis.categories = ['SP mini', '一代插座', 'OEM 插座', 'RM', '黑豆', '格力 空调 家用', '格力 空调 商用', 'SP2', 'S1', 'A1'];
 			});
 		},
 		// timeTab切换

@@ -14,7 +14,7 @@
 				<router-link class="routerLink" to="/device">
 					<h4 class="title">设备活跃数量</h4>
 					<h2 class="title" v-text="pie.totalNumber"></h2>
-					<highcharts :options="pie.options" ref="highcharts"></highcharts>
+					<highcharts :options="pie.options" ref="highcharts" style="height: 380px;"></highcharts>
 				</router-link>
 			</li>
 			<li class="link">
@@ -29,7 +29,7 @@
 				<router-link class="routerLink" to="/user">
 					<h4 class="title">用户活跃数量</h4>
 					<h2 class="title" v-text="column.totalNumber"></h2>
-					<highcharts :options="column.options" ref="highcharts"></highcharts>
+					<highcharts :options="column.options" ref="highcharts" style="height: 380px;"></highcharts>
 				</router-link>
 			</li>
 			<li class="link">
@@ -44,7 +44,7 @@
 				<router-link class="routerLink" to="/app">
 					<h4 class="title">APP日活跃数量</h4>
 					<h2 class="title" v-text="line.totalNumber"></h2>
-					<highcharts :options="line.options" ref="highcharts"></highcharts>
+					<highcharts :options="line.options" ref="highcharts" style="height: 380px;"></highcharts>
 				</router-link>
 			</li>
 			<div class="clear"></div>
@@ -75,7 +75,7 @@
 			
 			<!-- 气泡 -->
 			<ul class="bubble">
-				<li v-for="(item, index) in bubbleData" :style="{background: 'url(' + backgroundImg.bubble + ') no-repeat center'}" >
+				<li v-for="(item, index) in bubbleData" :style="{'background-image': 'url(' + backgroundImg.bubble + ')'}" >
 					<router-link :to="item.routeUrl" :class="{moduleDisabled: item.num==0}">
 						<div class="text">
 							<p class="num" :class="{isHidden: item.num==0}">{{item.num}}%</p>
@@ -126,7 +126,7 @@
 				},
 				// 气泡数据
 				bubbleData: [{
-					num: 90.88,
+					num: 75,
 					title: '空调模型',
 					subTitle: '预测率',
 					routeUrl: 'model'
@@ -157,8 +157,8 @@
 		},
 		created() {
 			this.$http.get(config.httpUrl + 'queryKit').then((data) => {
-				this.line.options.series[0].data = data.data.data[0].monActive;
-				this.line.totalNumber = data.data.data[0].totalActive.toLocaleString();
+				this.line.options.series[0].data = data.data.data[3].monActive;
+				this.line.totalNumber = data.data.data[3].totalActive.toLocaleString();
 				this.line.options.xAxis.categories = this.getMonthArray();
 				// 计算刻度值
 				this.calTickerData(data.data.data[0].totalActive);
@@ -274,19 +274,19 @@
 		text-decoration: none;
 	}
 	.chart h4 {
-		margin: 30px 0 0 0;
-		font-size: 20px;
+		margin: 20px 0 0 0;
+		font-size: 15px;
 	}
 	.chart h2 {
-		margin: 20px 0 0 0;
-		font-size: 50px;
+		margin: 10px 0 0 0;
+		font-size: 30px;
 	}
 	
 	/************************数据流************************/
 	.dataflow {
 		position: relative;
 		z-index: 1;
-		height: 350px;
+		height: 250px;
 	}
 	.dataflow .dataContainer {
 		width: 100%;
@@ -324,7 +324,7 @@
 		z-index: 2;
 		margin: auto;
 		width: 100%;
-		height: 500px;
+		height: 400px;
 		background: linear-gradient(#009eda, #0068d5) no-repeat;
 	}
 	/*.waterBox .ticker {
@@ -361,21 +361,24 @@
 		bottom: 0;
 		margin: auto;
 		width: 100%;
-		height: 300px;
+		height: 260px;
 	}
 
 	.waterBox .bubble li {
 		position: relative;
 		float: left;
 		list-style-type: none;
-		margin: 0 2%;
-		width: 16%;
-		height: 300px;
+		margin: 0 2.5%;
+		width: 15%;
+		height: 225px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: contain;
 	}
 	.waterBox .bubble li:first-child:before {
 		content: '';
 		position: absolute;
-		bottom: -5%;
+		bottom: -10%;
 		left: 10%;
 		display: inline-block;
 		width: 40px;

@@ -43,12 +43,12 @@
 		</div>
 
 		<!-- 表格 -->
-		<div class="tablePart">
+		<!-- <div class="tablePart">
 			<h2 class="chartsTitle">
 				{{options.subtitle.text}}
 			</h2>
 			<mytable :dataFromParent="options"></mytable>
-		</div>
+		</div> -->
 
 	</div>
 </template>
@@ -83,37 +83,42 @@
 			let url = config.httpUrl + 'queryKit';
 			let columnTitle = 'DNA KIT增长曲线';
 			let tableTitle = 'DNA KIT激活数量列表';
+			let ymin = 27000;
 			// 初始化时加载kit数据
-			this.queryData(url, columnTitle, tableTitle);
+			this.queryData(url, columnTitle, tableTitle, ymin);
 		},
 		methods: {
 			// tab切换
 			toggle(index) {
-				let url = '', columnTitle = '', tableTitle = '';
+				let url = '', columnTitle = '', tableTitle = '', ymin = 0;
 				switch(index) {
 					case 0: {
 						url = config.httpUrl + 'queryKit';
 						columnTitle = 'DNA KIT增长曲线';
 						tableTitle = 'DNA KIT激活数量列表';
+						ymin = 27000;
 						break;
 					}
 					case 1: {
-						url = config.httpUrl + 'queryNet';
+						url = config.httpUrl + 'queryThird';
 						columnTitle = '第三方设备增长曲线';
 						tableTitle = '第三方设备激活数量列表';
+						ymin = 13000;
 						break;
 					}
 					case 2: {
-						url = config.httpUrl + 'queryKit';
+						url = config.httpUrl + 'queryNet';
 						columnTitle = '互联网设备增长曲线';
 						tableTitle = '互联网设备激活数量列表';
+						ymin = 0;
 						break;
 					}
 						
 					case 3: {
-						url = config.httpUrl + 'queryNet';
+						url = config.httpUrl + 'queryVirtual';
 						columnTitle = '虚拟设备增长曲线';
 						tableTitle = '虚拟设备激活数量列表';
+						ymin = 0;
 						break;
 					}
 						
@@ -121,7 +126,7 @@
 				// 防止同一个按钮点击多次下发多个查询
 				if (this.navTab.activeIndex !== index) {
 					// 查询
-					this.queryData(url, columnTitle);
+					this.queryData(url, columnTitle, tableTitle, ymin);
 				}
 
 				// 添加激活样式
@@ -140,13 +145,13 @@
 				return monArray;
 			},
 			// 查询统计数据
-			queryData(url, columnTitle, tableTitle) {
+			queryData(url, columnTitle, tableTitle, ymin) {
 				this.$http.get(url).then((data) => {
 					// 处理数据统计值
 					let dealArray = ['todayActive', 'curMonActive', 'totalActive'];
 					this.data = data.data.data[0];
 					for (let k in this.data) {
-						if (dealArray.indexOf(k) > 0) {
+						if (dealArray.indexOf(k) > -1) {
 							this.data[k] = this.data[k].toLocaleString();
 						}
 					}
@@ -154,6 +159,7 @@
 					// 处理柱状图
 					this.options.series[0].data = data.data.data[0].monActive;
 					this.options.xAxis.categories = this.getMonthArray();
+					this.options.yAxis.min = ymin;
 					this.options.title.text = columnTitle;
 					this.options.subtitle.text = tableTitle;
 				});
@@ -238,8 +244,8 @@
 
 	/************************数据统计************************/
 	.dataCount {
-		margin: 70px 0 30px 0;
-		padding-bottom: 50px;
+		margin: 20px 0 20px 0;
+		padding-bottom: 20px;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 	}
 	.dataCount li {
@@ -259,7 +265,8 @@
 
 	/************************柱状图************************/
 	.chartsPart {
-		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+		/*border-bottom: 1px solid rgba(255, 255, 255, 0.5);*/
+		margin-top: 100px;
 		margin-bottom: 40px;
 	}
 	.charts {

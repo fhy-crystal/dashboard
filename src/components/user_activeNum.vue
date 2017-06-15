@@ -3,15 +3,15 @@
 		<!-- 数据统计 -->
 		<ul class="dataCount">
 			<li>
-				<p class="title">今日活跃数量</p>
+				<p class="title">今日活跃用户</p>
 				<span class="number">{{data.todayActive}}</span>
 			</li>
 			<li>
-				<p class="title">当月活跃数量</p>
+				<p class="title">当月活跃用户</p>
 				<span class="number">{{data.curMonActive}}</span>
 			</li>
 			<li>
-				<p class="title">总活跃数量</p>
+				<p class="title">总活跃用户</p>
 				<span class="number">{{data.totalActive}}</span>
 			</li>
 			<div class="clear"></div>
@@ -23,14 +23,14 @@
 				<h2 class="chartsTitle">
 					{{options.title.text}}
 				</h2>
-				<ul class="firstNav">
+				<!-- <ul class="firstNav">
 					<li class="firstNavItem" @click="changeTab(index, tab.queryUrl)" v-for="(tab, index) in areaTab.tabs" :class="{timeActive: areaTab.activeIndex==index&&!areaTab.isMore}">
 						{{tab.name}}
 					</li>
 					<li class="firstNavItem more" @click="selectMore()" :class="[{timeActiveNoRadius: areaTab.isMore&&areaTab.subTabShow}, {timeActive: areaTab.isMore}]">
 						{{areaTab.subName}}
 					</li>
-					<!-- 二级菜单 -->
+					
 					<ul class="subNav" v-show="areaTab.isMore&&areaTab.subTabShow">
 						<li class="subNavItem" v-for="(subtab, index) in areaTab.subTabs" @click="selectSubTab(subtab.name)">
 							{{subtab.name}}
@@ -38,7 +38,7 @@
 					</ul>
 					<div class="clear"></div>
 					
-				</ul>
+				</ul> -->
 				<div class="clear"></div>
 			</div>
 			<highcharts class="charts" :options="options" ref="highcharts"></highcharts>
@@ -89,7 +89,7 @@ export default {
 		let lineUrl = config.httpUrl + 'queryAppByDay'
 		// 初始化时加载kit数据
 		this.queryData(url);
-		this.drawLine(lineUrl);
+		this.drawLine(url);
 	},
 	methods: {
 		// 查询统计数据
@@ -97,9 +97,9 @@ export default {
 			this.$http.get(url).then((data) => {
 				// 处理数据统计值
 				let dealArray = ['todayActive', 'curMonActive', 'totalActive'];
-				this.data = data.data.data[0];
+				this.data = data.data.data[1];
 				for (let k in this.data) {
-					if (dealArray.indexOf(k) > 0) {
+					if (dealArray.indexOf(k) > -1) {
 						this.data[k] = this.data[k].toLocaleString();
 					}
 				}
@@ -109,16 +109,31 @@ export default {
 		drawLine(url) {
 			this.$http.get(url).then((data) => {
 				// 处理折线图
-				this.options.series[0].data = data.data.data[0].data;
-				let hourArr = [];
-				for (let i = 0; i <= 24; i++) {
-					if (i < 10) {
-						i = '0' + i
-					}
-					hourArr.push(i + ':00')
-				}
-				this.options.xAxis.categories = hourArr;
+				// this.options.series[0].data = data.data.data[0].data;
+				// let hourArr = [];
+				// for (let i = 0; i <= 24; i++) {
+				// 	if (i < 10) {
+				// 		i = '0' + i
+				// 	}
+				// 	hourArr.push(i + ':00')
+				// }
+				// this.options.xAxis.categories = hourArr;
+				// 处理柱状图
+				this.options.series[0].data = data.data.data[1].monActive;
+				this.options.xAxis.categories = this.getMonthArray();
 			});
+		},
+		// 格式化月份
+		getMonthArray() {
+			let curMonth = new Date().getMonth();
+			let monArray = [];
+			for (let i = curMonth + 1; i <= 12; i++) {
+				monArray.push(i + '月')
+			}
+			for (let i = 1; i <= curMonth; i++) {
+				monArray.push(i + '月')
+			}
+			return monArray;
 		},
 		// areaTab切换
 		changeTab(index, url) {
@@ -161,8 +176,8 @@ export default {
 		color: rgba(255, 255, 255, 0.5);
 	}
 	.dataCount {
-		margin: 70px 0 30px 0;
-		padding-bottom: 50px;
+		margin: 20px 0 20px 0;
+		padding-bottom: 20px;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 	}
 	.dataCount li {

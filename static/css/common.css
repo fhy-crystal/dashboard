@@ -2,11 +2,13 @@
 	box-sizing: border-box;
 }
 html, body {
-	background: linear-gradient(#084782, #000307) no-repeat;\
+	background: linear-gradient(#084782, #000307) no-repeat;
 	-webkit-user-select: none;/*webkit浏览器*/
 	-moz-user-select: none;/*火狐*/
 	-ms-user-select: none;/*IE10*/
 	user-select: none;
+	overflow-y: hidden;
+	height: 100%;
 }
 a {
 	text-decoration: none;

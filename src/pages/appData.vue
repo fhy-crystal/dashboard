@@ -20,15 +20,15 @@
 		<!-- 数据统计 -->
 		<ul class="dataCount">
 			<li>
-				<p class="title">今日激活数量</p>
+				<p class="title">今日活跃</p>
 				<span class="number">{{data.todayActive}}</span>
 			</li>
 			<li>
-				<p class="title">当月激活数量</p>
+				<p class="title">当月新增</p>
 				<span class="number">{{data.curMonActive}}</span>
 			</li>
 			<li>
-				<p class="title">总激活数量</p>
+				<p class="title">总活跃</p>
 				<span class="number">{{data.totalActive}}</span>
 			</li>
 			<div class="clear"></div>
@@ -68,12 +68,14 @@
 				navTab: {
 					activeIndex: 0,
 					tabs: [{
-						name: 'APP实时活跃曲线'
-					},{
-						name: 'iOS APP实时活跃曲线'
-					},{
-						name: 'Android APP实时活跃曲线'
-					}],
+						name: 'APP活跃数量'
+					}
+					// ,{
+					// 	name: 'iOS APP日活'
+					// },{
+					// 	name: 'Android APP日活'
+					// }
+					],
 				},
 				timeTab: {
 					activeIndex: 0,
@@ -168,9 +170,9 @@
 				this.$http.get(url).then((data) => {
 					// 处理数据统计值
 					let dealArray = ['todayActive', 'curMonActive', 'totalActive'];
-					this.data = data.data.data[0];
+					this.data = data.data.data[3];
 					for (let k in this.data) {
-						if (dealArray.indexOf(k) > 0) {
+						if (dealArray.indexOf(k) > -1) {
 							this.data[k] = this.data[k].toLocaleString();
 						}
 					}
@@ -182,11 +184,7 @@
 					this.options.series[0].data = data.data.data[0].data;
 					switch(index) {
 						case 0: { // 年
-							let monthArr = [];
-							for (let i = 1; i <= 12; i++) {
-								monthArr.push(i + '月')
-							}
-							this.options.xAxis.categories = monthArr;
+							this.options.xAxis.categories = this.getMonthArray();
 							break;
 						}
 						case 1: { // 月
@@ -198,13 +196,18 @@
 							break;
 						}
 						case 2: { // 日
-							let hourArr = [];
-							for (let i = 0; i <= 24; i++) {
-								if (i < 10) {
-									i = '0' + i
+							let hourArr1 = [], hourArr2 = [];
+							for (let i = 0; i < 24; i++) {
+								if (i >= 18) {
+									hourArr2.push(i + ':00');
+								} else {
+									if (i < 10) {
+										i = '0' + i;
+									}
+									hourArr1.push(i + ':00');
 								}
-								hourArr.push(i + ':00')
 							}
+							let hourArr = hourArr2.concat(hourArr1);
 							this.options.xAxis.categories = hourArr;
 							break;
 						}
@@ -289,8 +292,8 @@
 
 	/************************数据统计************************/
 	.dataCount {
-		margin: 70px 0 30px 0;
-		padding-bottom: 50px;
+		margin: 20px 0 20px 0;
+		padding-bottom: 20px;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 	}
 	.dataCount li {

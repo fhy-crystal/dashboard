@@ -6,14 +6,14 @@
 				<h2 class="chartsTitle">
 					{{options.title.text}}
 				</h2>
-				<ul class="firstNav">
+				<!-- <ul class="firstNav">
 					<li class="firstNavItem" @click="changeTab(index, tab.queryUrl)" v-for="(tab, index) in areaTab.tabs" :class="{timeActive: areaTab.activeIndex==index&&!areaTab.isMore}">
 						{{tab.name}}
 					</li>
 					<li class="firstNavItem more" @click="selectMore()" :class="[{timeActiveNoRadius: areaTab.isMore&&areaTab.subTabShow}, {timeActive: areaTab.isMore}]">
 						{{areaTab.subName}}
 					</li>
-					<!-- 二级菜单 -->
+					
 					<ul class="subNav" v-show="areaTab.isMore&&areaTab.subTabShow">
 						<li class="subNavItem" v-for="(subtab, index) in areaTab.subTabs" @click="selectSubTab(subtab.name)">
 							{{subtab.name}}
@@ -21,7 +21,7 @@
 					</ul>
 					<div class="clear"></div>
 					
-				</ul>
+				</ul> -->
 				<div class="clear"></div>
 			</div>
 			<highcharts class="charts" :options="options" ref="highcharts"></highcharts>
@@ -78,13 +78,18 @@ export default {
 			this.$http.get(url).then((data) => {
 				// 处理折线图
 				this.options.series[0].data = data.data.data[0].data;
-				let hourArr = [];
-				for (let i = 0; i <= 24; i++) {
-					if (i < 10) {
-						i = '0' + i
+				let hourArr1 = [], hourArr2 = [];
+				for (let i = 0; i < 24; i++) {
+					if (i >= 18) {
+						hourArr2.push(i + ':00');
+					} else {
+						if (i < 10) {
+							i = '0' + i;
+						}
+						hourArr1.push(i + ':00');
 					}
-					hourArr.push(i + ':00')
 				}
+				let hourArr = hourArr2.concat(hourArr1);
 				this.options.xAxis.categories = hourArr;
 			});
 		},
@@ -116,6 +121,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 	.content {
+		padding-top: 100px;
 		height: 1220px;
 	}
 	.chartsPart .top h2 {
